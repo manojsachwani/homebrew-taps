@@ -33,9 +33,9 @@ cask "deadwood" do
 
   binary "deadwood"
 
-  postflight do
-    if OS.mac?
-      system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/deadwood"]
+  on_macos do
+    postflight_steps do
+      run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{staged_path}}/deadwood"]
     end
   end
 
